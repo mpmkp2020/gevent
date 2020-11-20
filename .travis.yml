@@ -63,7 +63,6 @@ env:
       - TRAVIS_PYTHON_VERSION=3.5
       - TRAVIS_PYTHON_VERSION=3.6
       - TRAVIS_PYTHON_VERSION=3.6
-        arch: arm64
       - TRAVIS_PYTHON_VERSION=3.7
       - TRAVIS_PYTHON_VERSION=3.8
       - TRAVIS_PYTHON_VERSION=3.9
@@ -200,6 +199,7 @@ jobs:
       after_success: true
     - <<: *build-gevent
       env: TRAVIS_PYTHON_VERSION=3.8
+      arch: arm64
     - <<: *build-gevent
       env: TRAVIS_PYTHON_VERSION=3.5
     - <<: *build-gevent
