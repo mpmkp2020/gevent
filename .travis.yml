@@ -17,7 +17,9 @@ addons:
   homebrew:
     packages:
       - ccache
-
+arch:
+  - amd64
+  - arm64
 env:
     global:
         - BUILD_RUNTIMES=$HOME/.runtimes
