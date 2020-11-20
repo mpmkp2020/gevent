@@ -49,6 +49,7 @@ if [ -d /gevent -a -d /opt/python ]; then
     export XDG_CACHE_HOME="/cache"
     ls -ld /cache
     ls -ld /cache/pip
+    yum -y install epel-release
     yum -y install libffi-devel ccache
     # On Fedora Rawhide (F33)
     # yum install python39 python3-devel gcc kernel-devel kernel-headers make diffutils file
@@ -106,5 +107,9 @@ echo Sharing ccache dir at $HOME/.ccache
 if [ ! -d $HOME/.ccache ]; then
     mkdir $HOME/.ccache
 fi
-docker run --rm -ti -v "$(pwd):/gevent" -v "$LCACHE:/cache" -v "$HOME/.ccache:/ccache" ${DOCKER_IMAGE:-quay.io/pypa/manylinux2010_x86_64} /gevent/scripts/releases/$(basename $0)
+if [ `uname -m` = 'aarch64' ]
+    docker run --rm -ti -v "$(pwd):/gevent" -v "$LCACHE:/cache" -v "$HOME/.ccache:/ccache" ${DOCKER_IMAGE:-quay.io/pypa/manylinux2014_aarc64} /gevent/scripts/releases/$(basename $0)
+else
+    docker run --rm -ti -v "$(pwd):/gevent" -v "$LCACHE:/cache" -v "$HOME/.ccache:/ccache" ${DOCKER_IMAGE:-quay.io/pypa/manylinux2010_x86_64} /gevent/scripts/releases/$(basename $0)
+fi
 ls -l wheelhouse

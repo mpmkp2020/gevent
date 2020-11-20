@@ -199,6 +199,8 @@ jobs:
       after_success: true
     - <<: *build-gevent
       env: TRAVIS_PYTHON_VERSION=3.8
+    - <<: *build-gevent
+      env: TRAVIS_PYTHON_VERSION=3.8
       arch: arm64
     - <<: *build-gevent
       env: TRAVIS_PYTHON_VERSION=3.5
@@ -281,6 +283,18 @@ jobs:
         - mkdir -p $HOME/.cache/pip
         - chmod a+w $HOME/.cache/pip
 
+    - stage: test
+      name: AArch64 manylinux wheels (all Pythons)
+      language: python
+      services: docker
+      env: DOCKER_IMAGE=quay.io/pypa/manylinux2014_aarch64
+      install: docker pull $DOCKER_IMAGE
+      script: bash scripts/releases/make-manylinux
+      before_script:
+        - python -mpip install -U pip twine
+        - chmod a+w $HOME/.cache
+        - mkdir -p $HOME/.cache/pip
+        - chmod a+w $HOME/.cache/pip
     # 32-bit manylinux temporarily commentted out.
     # https://github.com/cython/cython/issues/3840 has surfaced again.
     # - stage: test
