@@ -151,7 +151,6 @@ after_success:
 stages:
   - build-gevent
   - test
-    arch: arm64
 
 
 jobs:
