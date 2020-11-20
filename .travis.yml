@@ -284,6 +284,7 @@ jobs:
         - chmod a+w $HOME/.cache/pip
 
     - stage: test
+      arch: arm64
       name: AArch64 manylinux wheels (all Pythons)
       language: python
       services: docker
