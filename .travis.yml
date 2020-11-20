@@ -6,7 +6,7 @@
 # we're only using in hopes of being able to go *back* to using
 # python: one day so making the migration simpler). "shell" and
 # "minimal" are aliases.
-language: shell
+language: shell 
 dist: bionic
 group: travis_latest
 os:
